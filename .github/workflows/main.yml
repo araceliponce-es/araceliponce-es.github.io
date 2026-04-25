@@ -41,6 +41,7 @@ jobs:
           "
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_ACTION_PATH: ${{ github.action_path }}
 
       # 3. Subir artefacto para GitHub Pages
       - name: Upload Pages Artifact
