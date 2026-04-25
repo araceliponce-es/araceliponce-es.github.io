@@ -1,0 +1,62 @@
+name: abc
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      # 1. Checkout del repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Ejecutar action
+      - name: Run action
+        uses: araceliponce-es/bears@main
+        with:
+          gh_token: ${{ secrets.GH_TOKEN }}
+          gh_username: ${{ github.actor }}
+          tags_to_observe: "project,hackathon"
+          title: "My Projects"
+          stylesheet: "main.css"
+
+      - name: Test GH_TOKEN
+        run: |
+          python -c "
+          import os
+          from github import Github, Auth
+          g = Github(auth=Auth.Token(os.environ['GH_TOKEN']))
+          print('....')
+          print(g.get_user().login)
+          print([r.name for r in g.get_user().get_repos()[:5]])
+          "
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # 3. Subir artefacto para GitHub Pages
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      # 4. Deploy automático a GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
