@@ -29,20 +29,6 @@ jobs:
           title: "My Projects"
           stylesheet: "main.css"
 
-      - name: Test GH_TOKEN
-        run: |
-          python -c "
-          import os
-          from github import Github, Auth
-          g = Github(auth=Auth.Token(os.environ['GH_TOKEN']))
-          print('....')
-          print(g.get_user().login)
-          print([r.name for r in g.get_user().get_repos()[:5]])
-          "
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_ACTION_PATH: ${{ github.action_path }}
-
       # 3. Subir artefacto para GitHub Pages
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
