@@ -26,8 +26,8 @@ jobs:
           gh_token: ${{ secrets.GH_TOKEN }}
           gh_username: ${{ github.actor }}
           tags_to_observe: "project,hackathon"
-          title: "My Projects"
-          stylesheet: "main.css"
+          title: "hi"
+          stylesheet: "main2.css"
 
       # 3. Subir artefacto para GitHub Pages
       - name: Upload Pages Artifact
