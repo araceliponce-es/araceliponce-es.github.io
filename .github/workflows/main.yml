@@ -25,7 +25,7 @@ jobs:
         with:
           gh_token: ${{ secrets.GH_TOKEN }}
           gh_username: ${{ github.actor }}
-          tags_to_observe: "project,hackathon"
+          tags_to_observe: "one,two"
           title: "hi"
           stylesheet: "main2.css"
 
