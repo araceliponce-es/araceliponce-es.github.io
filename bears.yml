@@ -1,0 +1,16 @@
+title: Hii
+
+topics:
+  - one
+  - two
+
+stylesheets:
+  - output.css
+  - portfolio.css
+  - main2.css
+
+# convierte input.css a output.css usando tailwindcss
+tailwind:
+  source: input.css
+  output: output.css
+  minify: true

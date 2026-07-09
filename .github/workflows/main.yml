@@ -21,7 +21,7 @@ jobs:
 
       # 2. Ejecutar action
       - name: Run action
-        uses: araceliponce-es/bears@main
+        uses: araceliponce-es/bears@testing
         with:
           gh_token: ${{ secrets.GH_TOKEN }}
           gh_username: ${{ github.actor }}
